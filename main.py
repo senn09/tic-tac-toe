@@ -90,6 +90,9 @@ class TicTacToe():
         self.game_state = [[None for _ in range(3)] for _ in range(3)]
         self.turn = 'X'
 
+    def isDraw(self):
+        return any(None in sublist for sublist in self.game_state)
+
 t = TicTacToe()
 while(True):
     t.printGameState()
@@ -98,6 +101,12 @@ while(True):
         if t.isValidGameState():
             if t.isWin():
                 print("You Win!")
+                t.resetGameState()
+                if input("Play Again? (y): ").lower() != 'y':
+                    break
+                continue
+            elif t.isDraw():
+                print("Game is a Draw")
                 t.resetGameState()
                 if input("Play Again? (y): ").lower() != 'y':
                     break
